@@ -19,7 +19,7 @@ defmodule Kaisuu.Mixfile do
   def application do
     [mod: {Kaisuu, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :extwitter, :exredis]]
+                    :phoenix_ecto, :postgrex, :extwitter]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,8 +38,7 @@ defmodule Kaisuu.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:oauth, github: "tim/erlang-oauth"},
-     {:extwitter, "~> 0.6"},
-     {:exredis, ">= 0.2.2"}]
+     {:extwitter, "~> 0.6"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

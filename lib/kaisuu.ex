@@ -10,7 +10,6 @@ defmodule Kaisuu do
       # Start the endpoint when the application starts
       supervisor(Kaisuu.Endpoint, []),
 
-      worker(Kaisuu.RedisRepo, [:redis]),
       worker(Kaisuu.TwitterStreamer, []),
     ]
 
