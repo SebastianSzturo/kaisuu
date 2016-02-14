@@ -19,7 +19,7 @@ defmodule Kaisuu.Mixfile do
   def application do
     [mod: {Kaisuu, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :extwitter, :hexate]]
+                    :phoenix_ecto, :postgrex, :extwitter, :exredis]]
   end
 
   # Specifies which paths to compile per environment.
