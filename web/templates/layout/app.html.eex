@@ -14,7 +14,13 @@
   <body>
     <div class="container">
       <header class="header">
-        <h2>Welcome to 回数 [Kaisuu]</h2>
+        <h2>
+          Welcome to 回数 [Kaisuu]
+          <!-- Place this tag where you want the button to render. -->
+          <div class="pull-right" style="margin-top: 20px; margin-right: 15px">
+            <a class="github-button" href="https://github.com/SebastianSzturo/kaisuu" data-style="mega" data-count-href="/SebastianSzturo/kaisuu/stargazers" data-count-api="/repos/SebastianSzturo/kaisuu#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star SebastianSzturo/kaisuu on GitHub">Star</a>
+          </div>
+        </h2>
         <p class="lead">Watch Japan's Kanji Usage on Twitter in Realtime! </p>
         <hr>
       </header>
@@ -29,5 +35,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/tinysort/2.2.4/tinysort.min.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+    <script id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
