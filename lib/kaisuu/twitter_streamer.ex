@@ -18,8 +18,8 @@ defmodule Kaisuu.TwitterStreamer do
       japan = "129.484177, 30.923179, 145.985641, 45.799878"
 
       stream = ExTwitter.stream_filter([locations: japan, language: "ja"], :infinity)
+      |> Stream.filter(fn(tweet) -> tweet_is_unique(tweet) end)
       |> Stream.map(fn(tweet) -> tweet.text end)
-      # Filter non unique tweets
       |> Stream.map(fn(text) -> remove_non_kanji_characters(text) end)
       |> Stream.flat_map(fn(text) -> extract_kanji(text) end)
       |> Stream.map(fn(kanji) -> write_to_redis(kanji) end)
@@ -28,6 +28,14 @@ defmodule Kaisuu.TwitterStreamer do
     end
 
     {:noreply, state}
+  end
+
+  defp tweet_is_unique(tweet) do
+    unique = true
+    if tweet.favorited,     do: unique = false
+    if tweet.retweeted,     do: unique = false
+    if tweet.quoted_status, do: unique = false
+    unique
   end
 
   defp remove_non_kanji_characters(text) do
