@@ -1,35 +1,46 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+<div style="margin-bottom: 40px;">
+  <!-- Total Kanjis: <%= Enum.count(@kanji_data) %> - Kanji Data Count: <%= @kanji_data_count %><br>
+  <hr> -->
+  <%= for kanji <- @kanji_data do %>
+    <span class="kanji" id="<%= kanji %>">&#x<%= kanji %></span>
+  <% end %>
+</div>
+
+<div>
+  <h3> How can this help me? </h3>
+  <hr>
+  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+
+  <hr>
 </div>
 
 <div class="row marketing">
   <div class="col-lg-6">
-    <h4>Resources</h4>
+    <h4>Kaisuu</h4>
     <ul>
       <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
+        <a href="http://groups.google.com/group/phoenix-talk">Github</a>
       </li>
       <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
+        <a href="http://webchat.freenode.net/?channels=elixir-lang">Export CSV</a>
       </li>
       <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+        <a href="https://twitter.com/elixirphoenix">API</a>
       </li>
     </ul>
   </div>
 
   <div class="col-lg-6">
-    <h4>Help</h4>
+    <h4>Useful Links</h4>
     <ul>
       <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
+        <a href="http://phoenixframework.org/docs/overview">r/LearningJapanese</a>
       </li>
       <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
+        <a href="http://hexdocs.pm/phoenix">Wanikani</a>
       </li>
       <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
+        <a href="https://github.com/phoenixframework/phoenix">Source</a>
       </li>
     </ul>
   </div>

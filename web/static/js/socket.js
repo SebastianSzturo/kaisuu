@@ -60,8 +60,9 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("new_kanji", payload => {
-  console.log(payload.body)
-  $(".jumbotron").append(payload.body)
+  console.log(payload.kanji)
+  var element = "#" + payload.hex
+  $(element).effect("highlight", {}, 3000);
 })
 
 
