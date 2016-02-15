@@ -38,7 +38,9 @@ defmodule Kaisuu.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:oauth, github: "tim/erlang-oauth"},
-     {:extwitter, "~> 0.6"}]
+     {:extwitter, "~> 0.6"},
+     {:redix, "~> 0.3"},
+     {:poolboy, "~> 1.5"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
