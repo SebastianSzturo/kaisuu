@@ -1,11 +1,11 @@
 <div style="margin-bottom: 40px;">
-  <!-- Total Kanjis: <%= Enum.count(@kanji_data) %> - Kanji Data Count: <%= @kanji_data_count %><br>
-  <hr> -->
-  <%= for kanji <- @kanji_data do %>
-    <span class="kanji" id="<%= kanji %>">&#x<%= kanji %></span>
+  <%= for {kanji, count} <- @kanji_data do %>
+    <span class="kanji" id="<%= kanji %>" data-count="<%= count %>">
+      &#x<%= kanji %>
+    </span>
   <% end %>
 </div>
-
+<!-- 
 <div>
   <h3> How can this help me? </h3>
   <hr>
@@ -44,4 +44,4 @@
       </li>
     </ul>
   </div>
-</div>
+</div> -->

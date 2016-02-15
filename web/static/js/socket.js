@@ -7,10 +7,10 @@ import {Socket} from "phoenix"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
-// When you connect, you'll often need to authenticate the client.
+// When you connect, you"ll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
-// If the current user exists you can assign the user's token in
+// If the current user exists you can assign the user"s token in
 // the connection for use in the layout.
 //
 // In your "web/router.ex":
@@ -49,7 +49,7 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 //     end
 //
 // Finally, pass the token on connect as below. Or remove it
-// from connect if you don't care about authentication.
+// from connect if you don"t care about authentication.
 
 socket.connect()
 
@@ -60,10 +60,14 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("new_kanji", payload => {
-  console.log(payload.kanji)
-  var element = "#" + payload.hex
+  let element = "#" + payload.hex
   $(element).effect("highlight", {}, 3000);
+  let count = parseInt($(element).attr("data-count"))
+  $(element).attr("data-count", count + 1)
 })
 
+window.setInterval(function(){
+  tinysort("span.kanji",{ attr:"data-count", order: "desc" });
+}, 5000);
 
 export default socket

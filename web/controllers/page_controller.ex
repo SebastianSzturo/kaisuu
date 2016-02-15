@@ -4,14 +4,19 @@ defmodule Kaisuu.PageController do
   def index(conn, _params) do
 
     # redis.sort("kanji_data", :by => "kanji:*->count", :order => "desc") # => ["2", "1"]
-    top_used_kanji_query = ~w(SORT kanji_data BY kanji:*->count DESC)
-    {:ok, kanji_data} = Kaisuu.RedisPool.command(top_used_kanji_query)
+    command = ~w(SORT kanji_data BY kanji:*->count DESC GET #)
+    {:ok, kanji_data} = Kaisuu.RedisPool.command(command)
 
-    {:ok, kanji_data_count} = Kaisuu.RedisPool.command ~w(GET kanji_data_count)
+    command = kanji_data |> Enum.map(fn(key) -> ~w(HGET kanji:#{key} count) end)
+    {:ok, kanji_data_count} = Kaisuu.RedisPool.pipeline(command)
+
+    kanji_data = Enum.zip(kanji_data, kanji_data_count)
+
+    {:ok, kanji_data_total_count} = Kaisuu.RedisPool.command ~w(GET kanji_data_count)
 
     conn
-    |> assign(:kanji_data_count, kanji_data_count)
     |> assign(:kanji_data, kanji_data)
+    |> assign(:kanji_data_total_count, kanji_data_total_count)
     |> render("index.html")
   end
 
