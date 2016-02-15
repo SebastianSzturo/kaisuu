@@ -19,8 +19,10 @@ defmodule Kaisuu.TwitterStreamer do
 
       stream = ExTwitter.stream_filter([locations: japan, language: "ja"], :infinity)
       |> Stream.map(fn(tweet) -> tweet.text end)
+      # Filter non unique tweets
       |> Stream.map(fn(text) -> remove_non_kanji_characters(text) end)
       |> Stream.flat_map(fn(text) -> extract_kanji(text) end)
+      |> Stream.map(fn(kanji) -> write_to_redis(kanji) end)
       |> Stream.map(fn(kanji) -> broadcast(kanji) end)
       Enum.to_list(stream)
     end
@@ -35,11 +37,25 @@ defmodule Kaisuu.TwitterStreamer do
 
   defp extract_kanji(text) do
     String.codepoints(text)
-    |> Enum.uniq
+  end
+
+  defp write_to_redis(kanji) do
+    hex_code_point = kanji |> String.to_char_list |> List.first |> Integer.to_string(16)
+
+    add_kanji_to_index = ~w(SADD kanji_data #{hex_code_point})
+    increase_kanji_count = ~w(HINCRBY kanji:#{hex_code_point} count 1)
+    increase_total_kanji_count = ~w(INCR kanji_data_count)
+
+    commands = [add_kanji_to_index, increase_kanji_count, increase_total_kanji_count]
+    Kaisuu.RedisPool.pipeline(commands)
+
+    kanji
   end
 
   defp broadcast(kanji) do
-    Kaisuu.Endpoint.broadcast! "kanji:all", "new_kanji", %{ body: kanji }
-    {:ok}
+    hex = kanji |> String.to_char_list |> List.first |> Integer.to_string(16)
+
+    Kaisuu.Endpoint.broadcast! "kanji:all", "new_kanji", %{ kanji: kanji, hex: hex }
+    kanji
   end
 end
