@@ -17,7 +17,7 @@ defmodule Kaisuu.TwitterStreamer do
       # Coordinates for most of Japan
       japan = "129.484177, 30.923179, 145.985641, 45.799878"
 
-      stream = ExTwitter.stream_filter(locations: japan, language: "ja")
+      stream = ExTwitter.stream_filter([locations: japan, language: "ja"], :infinity)
       |> Stream.map(fn(tweet) -> tweet.text end)
       |> Stream.map(fn(text) -> remove_non_kanji_characters(text) end)
       |> Stream.flat_map(fn(text) -> extract_kanji(text) end)
