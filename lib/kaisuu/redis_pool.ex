@@ -1,7 +1,12 @@
 defmodule Kaisuu.RedisPool do
   use Supervisor
 
-  @redis_connection_params host: "localhost"
+  IO.puts "ENV: #{System.get_env("MIX_ENV")}"
+  if System.get_env("MIX_ENV") == "prod" do
+    @redis_connection_params System.get_env("REDIS_URL")
+  else
+    @redis_connection_params "redis://localhost"
+  end
 
   def start_link do
     Supervisor.start_link(__MODULE__, [])
