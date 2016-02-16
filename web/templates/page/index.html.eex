@@ -5,14 +5,17 @@
     </span>
   <% end %>
 </div>
-<!-- 
-<div>
-  <h3> How can this help me? </h3>
-  <hr>
-  <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
 
+<div class="explanation">
+  <h3> What is this site for?</h3>
   <hr>
+  <p> Studying Kanjis can be a really long an tidious process. To make it easier and more motivating we need to use our kanji knowledge somewhere. This website provides you a list of all <a href="https://en.wikipedia.org/wiki/J%C5%8Dy%C5%8D_kanji" target="_blank">Jouyou Kanji</a> sorted by usage frequency from Tweets in Japan. So you can optimize the order of your kanji studies to read Tweets from Japan!</p>
+  <p>
+    We have counted <span id="kanji_total_count"><%= @kanji_data_total_count %></span> Kanji so far.
+  </p>
 </div>
+
+<!--
 
 <div class="row marketing">
   <div class="col-lg-6">

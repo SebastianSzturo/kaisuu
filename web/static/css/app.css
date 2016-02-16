@@ -25,6 +25,16 @@ form.link, form.button {
   padding-left: 15px;
 }
 
+.explanation p {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+#kanji_total_count {
+  font-weight: bold;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {

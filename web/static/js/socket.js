@@ -60,10 +60,15 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("new_kanji", payload => {
-  let element = "#" + payload.hex
-  $(element).effect("highlight", {}, 3000);
-  let count = parseInt($(element).attr("data-count"))
-  $(element).attr("data-count", count + 1)
+  let kanjiElement = $("#" + payload.hex);
+  let kanjiCount = parseInt(kanjiElement.attr("data-count"));
+
+  kanjiElement.effect("highlight", {}, 3000);
+  kanjiElement.attr("data-count", kanjiCount + 1);
+
+  let kanjiTotalCount = $("#kanji_total_count");
+  let oldCount =  parseInt(kanjiTotalCount.html());
+  kanjiTotalCount.html(oldCount + 1);
 })
 
 window.setInterval(function(){
